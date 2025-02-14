@@ -1,7 +1,7 @@
 import { MongoClient as Mongo, Db } from "mongodb";
 
 //db e client podem ser undfined caso a conexão não tenha sido realizada
-export const MongoCliente = {
+export const MongoClient = {
   client: undefined as unknown as Mongo,
   db: undefined as unknown as Db,
 

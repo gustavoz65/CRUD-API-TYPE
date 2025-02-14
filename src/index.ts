@@ -2,14 +2,14 @@ import { config } from "dotenv";
 import express from "express";
 import { MongogetUsersRepository } from "./repositories/get-users/mongo-get-users";
 import { GetUsersController } from "./controllers/get-users/get-user";
-import { MongoCliente } from "./database/mongo";
+import { MongoClient } from "./database/mongo";
 
 config();
 
 const main = async () => {
   const app = express();
 
-  await MongoCliente.connect();
+  await MongoClient.connect();
 
   app.get("/users", async (req, res) => {
     const mongoGetUsersRepository = new MongogetUsersRepository();
