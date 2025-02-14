@@ -8,7 +8,7 @@ export class MongogetUsersRepository implements IGetUsersRepository {
         id: "1",
         firstname: "Fulano",
         lastname: "Silva",
-        email: "H4e9C@example.com",
+        email: "teste@example.com",
         password: "1234",
       },
     ];
