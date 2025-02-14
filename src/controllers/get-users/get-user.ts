@@ -1,5 +1,6 @@
 import { IGetUsersController, IGetUsersRepository } from "./protocols";
 
+// dependência Injetada
 export class GetUsersController implements IGetUsersController {
   constructor(private readonly getUsersRepository: IGetUsersRepository) {}
 
@@ -9,15 +10,9 @@ export class GetUsersController implements IGetUsersController {
       // buscar usuários === Direciona chamada para repository
       const users = await this.getUsersRepository.getUsers();
 
-      return {
-        statusCode: 500,
-        body: users,
-      };
+      return { statusCode: 500, body: users };
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: "Somenthing went wrong",
-      };
+      return { statusCode: 500, body: "Somenthing went wrong" };
     }
   }
 }
