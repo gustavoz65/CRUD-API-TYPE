@@ -4,7 +4,7 @@ export interface HttpResponse<T> {
 }
 
 export interface HttpRequest<B> {
-  body?: B;
-  params?: any;
-  headers?: any;
+  body?: B; // Corpo da requisição (usado para POST/PUT)
+  params?: { [key: string]: string }; // Parâmetros de rota/query
+  headers?: { [key: string]: string }; // Cabeçalhos HTTP
 }

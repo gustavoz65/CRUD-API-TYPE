@@ -8,11 +8,11 @@ export class GetUsersController implements IGetUsersController {
     try {
       // validar requisição
       // buscar usuários === Direciona chamada para repository
-      const users = await this.getUsersRepository.getUsers();
+      const user = await this.getUsersRepository.getUsers();
 
-      return { statusCode: 500, body: users };
+      return { statusCode: 500, body: user };
     } catch (error) {
-      return { statusCode: 500, body: "Somenthing went wrong" };
+      return { statusCode: 500, body: "Somenthingggggggg went wrong" };
     }
   }
 }

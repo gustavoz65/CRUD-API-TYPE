@@ -7,23 +7,27 @@ import {
 } from "./protocols";
 
 export class CreateUsersController implements ICreateUsersController {
-  constructor(private readonly createUsersRepository: ICreateUsersRepository) {} // dependência injetada (readonly )
+  constructor(private readonly createUsersRepository: ICreateUsersRepository) {} // Dependência injetada
 
   async handle(
     httpRequest: HttpRequest<CreateUserParams>
   ): Promise<HttpResponse<User>> {
     try {
-      if (!httpRequest.body) {
-        return { statusCode: 400, body: "Please specify a body" };
+      if (!httpRequest.body || Object.keys(httpRequest.body).length === 0) {
+        return { statusCode: 400, body: "Please specify a valid body" };
       }
 
-      const users = await this.createUsersRepository.createUser(
+      const user = await this.createUsersRepository.createUser(
         httpRequest.body
       );
 
-      return { statusCode: 201, body: users };
+      return { statusCode: 201, body: user };
     } catch (error) {
-      return { statusCode: 500, body: "Somenthing went wrong" };
+      console.error("Error in CreateUsersController:", error);
+      return {
+        statusCode: 500,
+        body: "Something went wrong. Please try again later.",
+      };
     }
   }
 }
