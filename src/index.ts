@@ -1,9 +1,9 @@
 import { config } from "dotenv";
 import express from "express";
-import { MongogetUsersRepository } from "./repositories/get-users/mongo-get-users";
+import { PostgresGetUsersRepository } from "./repositories/get-users/postgres-get-users";
 import { GetUsersController } from "./controllers/get-users/get-user";
-import { MongoClient } from "./database/mongo";
-import { MongoCreateUserrepository } from "./repositories/create-users/mongo-create-users";
+import { PostgresClient } from "./database/postgres";
+import { PostgresCreateUserRepository } from "./repositories/create-users/postgres-create-users";
 import { CreateUsersController } from "./controllers/create-users/create-users";
 
 const main = async () => {
@@ -13,12 +13,14 @@ const main = async () => {
 
   app.use(express.json());
 
-  await MongoClient.connect();
+  await PostgresClient.connect();
 
   app.get("/users", async (req, res) => {
-    const mongoGetUsersRepository = new MongogetUsersRepository();
+    const postgresGetUsersRepository = new PostgresGetUsersRepository();
 
-    const getUsersController = new GetUsersController(mongoGetUsersRepository);
+    const getUsersController = new GetUsersController(
+      postgresGetUsersRepository
+    );
 
     const { body, statusCode } = await getUsersController.handle();
 
@@ -26,10 +28,10 @@ const main = async () => {
   });
 
   app.post("/users", async (req, res) => {
-    const mongoCreateUsersRepository = new MongoCreateUserrepository();
+    const postgresGetUsersRepository = new PostgresCreateUserRepository();
 
     const createUsersController = new CreateUsersController(
-      mongoCreateUsersRepository
+      postgresGetUsersRepository
     );
 
     const { body, statusCode } = await createUsersController.handle({
